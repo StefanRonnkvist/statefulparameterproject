@@ -48,61 +48,106 @@ class _RecordPage extends State<RecordPage> {
       appBar: AppBar(
         title: const Text('Data Passing'),
       ),
-      body: Center(
-        child: SizedBox(
-          width: 200,
-          child: Column(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: 'textEditingStringController',
-                  hintText: 'String',
-                  helperText: 'Text Editing String Controller',
+              Flexible(
+                flex: 2,
+                fit: FlexFit.tight,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 200,
+                      child: TextField(
+                        textAlign: TextAlign.center,
+                        decoration: const InputDecoration(
+                          labelText: 'textEditingStringController',
+                          hintText: 'String',
+                          helperText: 'Text Editing String Controller',
+                        ),
+                        controller: textEditingStringController,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      width: 200,
+                      child: TextField(
+                        textAlign: TextAlign.center,
+                        decoration: const InputDecoration(
+                          labelText: 'textEditingIntegerController',
+                          hintText: 'Integer',
+                          helperText: 'Text Editing Integer Controller',
+                        ),
+                        controller: textEditingIntegerController,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
-                controller: textEditingStringController,
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: 'textEditingIntegerController',
-                  hintText: 'Integer',
-                  helperText: 'Text Editing Integer Controller',
+              Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Name: ${userData.name}',
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              'Age: ${userData.age}',
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
+                      ])),
+              Flexible(
+                flex: 2,
+                fit: FlexFit.tight,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          userData = UserData(name: 'Updated Value', age: 65);
+                          textEditingStringController.text = userData.name;
+                          textEditingIntegerController.text =
+                              userData.age.toString();
+                        });
+                      },
+                      child: const Text('Update Data'),
+                    ),
+                  ],
                 ),
-                controller: textEditingIntegerController,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Name: ${userData.name}',
-                style: const TextStyle(fontSize: 18),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Age: ${userData.age}',
-                style: const TextStyle(fontSize: 18),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    userData = UserData(name: 'Updated Value', age: 65);
-                    textEditingStringController.text = userData.name;
-                    textEditingIntegerController.text = userData.age.toString();
-                  });
-                },
-                child: const Text('Update Data'),
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
